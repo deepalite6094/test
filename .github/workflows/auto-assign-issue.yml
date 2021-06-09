@@ -13,12 +13,11 @@ jobs:
     steps:
     - name: Echo
       run: | 
-        echo ${{Object.keys(github.event)}}
         echo ${{github.event == 'issue'}}
         echo ${{secrets.SECRET_TOKEN}}
       
     - name: Assign any new issue to Test Project
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event == 'issue'
+      if: true
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
