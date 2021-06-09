@@ -14,8 +14,7 @@ jobs:
     - name: Assign any new issue to test Project
       uses: srggrs/assign-one-project-github-action@1.2.1
       if: |
-        github.event == 'issue' &&
-        github.event.action == 'opened'
+        github.event == 'issue'
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
         column_name: 'Todo'
