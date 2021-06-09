@@ -13,7 +13,7 @@ jobs:
     steps:
     - name: Echo
       run: | 
-        echo ${{github.event}}
+        echo ${{Object.keys(github.event)}}
         echo ${{github.event == 'issue'}}
         echo ${{secrets.SECRET_TOKEN}}
       
