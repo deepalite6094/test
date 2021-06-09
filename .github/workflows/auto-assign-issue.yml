@@ -18,7 +18,6 @@ jobs:
       
     - name: Assign any new issue to Test Project
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: true
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
         column_name: 'To do'
