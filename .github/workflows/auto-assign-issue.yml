@@ -16,4 +16,4 @@ jobs:
       #if: github.event.action == 'opened'
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
-        #column_name: 'To do'
+        column_name: 'To do'
