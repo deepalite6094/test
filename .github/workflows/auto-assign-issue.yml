@@ -11,6 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Assign to One Project
     steps:
+    - name: Event echo
+      run: echo ${{ github.event }}
+      
     - name: Assign any new issue to Test Project
       uses: srggrs/assign-one-project-github-action@1.2.1
       if: github.event == 'issue'
