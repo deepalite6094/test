@@ -13,7 +13,6 @@ jobs:
     steps:
     - name: Assign any new issue to Test Project
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: |
-        github.event == 'issue'
+      if: github.event == 'issue'
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
