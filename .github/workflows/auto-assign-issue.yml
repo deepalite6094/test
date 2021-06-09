@@ -1,0 +1,21 @@
+name: Auto Assign to test
+
+on:
+  issues:
+    types: [opened]
+env:
+  GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
+
+jobs:
+  assign_one_project:
+    runs-on: ubuntu-latest
+    name: Assign to One Project
+    steps:
+    - name: Assign any new issue to test Project
+      uses: srggrs/assign-one-project-github-action@1.2.1
+      if: |
+        github.event == 'issue' &&
+        github.event.action == 'opened'
+      with:
+        project: 'https://github.com/deepalite6094/test/projects/1'
+        column_name: 'Todo'
