@@ -1,15 +1,15 @@
-name: Auto Assign to test
+name: Auto Assign to Test Project
 
 on:
   issues:
-    types: [opened]
+    types: [opened, labeled]
 env:
   GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
 
 jobs:
-  assign_one_project:
+  assign_to_test_project:
     runs-on: ubuntu-latest
-    name: Assign to One Project
+    name: Assign to Test Project Board
     steps:
     - name: Assign any new issue to test Project
       uses: srggrs/assign-one-project-github-action@1.2.1
