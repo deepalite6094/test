@@ -16,6 +16,11 @@ jobs:
     runs-on: ubuntu-latest
     name: Issue assignment JOB
     steps:
+    - name: Echo
+      run: | 
+        echo ${{github.event == 'pull_request'}}
+        echo ${{github.event == 'issue'}}
+    
     - name: Assign any new issue to Connect4
       # package respomsible for moving issue to project board
       uses: srggrs/assign-one-project-github-action@1.2.1
