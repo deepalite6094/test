@@ -18,8 +18,12 @@ jobs:
     steps:
     - name: Echo
       run: | 
-        echo ${{github.event.issue.pull_request}}
-        echo ${{!github.event.issue.pull_request}}
+        echo "------------------------------------------"
+        echo "${{ github.event.issue.pull_request }} : "
+        echo ${{ github.event.issue.pull_request }}
+        echo "${{ !github.event.issue.pull_request }} : "
+        echo ${{ !github.event.issue.pull_request }}
+        echo "------------------------------------------"
     
     - name: Assign any new issue to Connect4
       # package respomsible for moving issue to project board
