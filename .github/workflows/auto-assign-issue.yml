@@ -18,13 +18,13 @@ jobs:
     steps:
     - name: Echo
       run: | 
-        echo ${{github.event == 'pull_request'}}
-        echo ${{github.event == 'issue'}}
+        echo ${{github.event.issue.pull_request}}
+        echo ${{!github.event.issue.pull_request}}
     
     - name: Assign any new issue to Connect4
       # package respomsible for moving issue to project board
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event == 'issue'
+      if: ${{ !github.event.issue.pull_request }}
       with:
         # project contains url copied from connect4 Kanban board
         project: 'https://github.com/deepalite6094/test/projects/1'
@@ -33,7 +33,7 @@ jobs:
 
     - name: Assign any new pull requests to Connect4
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event == 'pull_request'
+      if: ${{ github.event.issue.pull_request }}
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
         column_name: 'Code Review'
