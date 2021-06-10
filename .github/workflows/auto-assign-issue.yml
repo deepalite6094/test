@@ -1,23 +1,34 @@
-name: Auto Assign to Test.Project
+name: Auto Assign issues to Connect4
 
+# Reference taken from https://github.com/marketplace/actions/assign-to-one-project
+# Automate action which gets triggered whenever new issue is created and it will assign it to a project
 on:
   issues:
     types: [opened, labeled, unlabeled]
+  pull_request_target:
+    types: [opened, labeled, unlabeled]
 env:
+    # TODO Generate token from Github settings and replace <SECRET_TOKEN> with its name
     GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
 
 jobs:
   assign_one_project:
     runs-on: ubuntu-latest
-    name: Assign to One Project
+    name: Issue assignment JOB
     steps:
-    - name: Echo
-      run: | 
-        echo ${{github.event == 'issue'}}
-        echo ${{secrets.SECRET_TOKEN}}
-      
-    - name: Assign any new issue to Test Project
+    - name: Assign any new issue to Connect4
+      # package respomsible for moving issue to project board
       uses: srggrs/assign-one-project-github-action@1.2.1
+      if: github.event == 'issue'
       with:
-        project: 'https://github.com/deepalite6094/test/projects/1'
-        column_name: 'To do'
+        # project contains url copied from connect4 Kanban board
+        project: 'https://github.com/connect4app/connect4/projects/1'
+        # column_name should be exact same as you have on board
+        column_name: 'To Do'
+
+    - name: Assign any new pull requests to Connect4
+      uses: srggrs/assign-one-project-github-action@1.2.1
+      if: github.event == 'pull_request'
+      with:
+        project: 'https://github.com/connect4app/connect4/projects/1'
+        column_name: 'Code Review'
