@@ -19,8 +19,8 @@ jobs:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "github.event.issue.opened : "
-        echo ${{ github.event.issue.opened }}
+        echo "github.event.issue : "
+        echo ${{ toJSON(github.event.issue) }}
         echo "------------------------------------------"
     
     - name: Assign any new issue to Connect4
@@ -41,8 +41,8 @@ jobs:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "github.event.pull_request.opened : "
-        echo ${{ github.event.pull_request.opened }}
+        echo "github.event.pull_request : "
+        echo ${{ toJSON(github.event.pull_request) }}
         echo "------------------------------------------"
         
     - name: Assign any new pull requests to Connect4
