@@ -37,13 +37,13 @@ jobs:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "github.event.pull_request == open : "
-        echo ${{ github.event.pull_request == 'open' }}
+        echo "github.event.pull_request.state == open : "
+        echo ${{ github.event.pull_request.state == 'open' }}
         echo "------------------------------------------"
         
     - name: Assign any new pull requests to Connect4
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: github.event.pull_request == 'open'
+      if: github.event.pull_request.state == 'open'
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
         column_name: 'Code Review'
