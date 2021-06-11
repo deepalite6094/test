@@ -12,16 +12,14 @@ env:
     GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
 
 jobs:
-  assign_one_project:
+  assign_issue:
     runs-on: ubuntu-latest
-    name: Issue assignment JOB
+    name: JOB Issue assignment
     steps:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "${{ github.event.issue.pull_request }} : "
-        echo ${{ github.event.issue.pull_request }}
-        echo "${{ !github.event.issue.pull_request }} : "
+        echo "!github.event.issue.pull_request : "
         echo ${{ !github.event.issue.pull_request }}
         echo "------------------------------------------"
     
@@ -34,7 +32,19 @@ jobs:
         project: 'https://github.com/deepalite6094/test/projects/1'
         # column_name should be exact same as you have on board
         column_name: 'To Do'
-
+        
+  assign_pullrequest_project:
+    runs-on: ubuntu-latest
+    name: JOB Pull request assignment
+    steps:
+    
+    - name: Echo
+      run: | 
+        echo "------------------------------------------"
+        echo "github.event.issue.pull_request : "
+        echo ${{ github.event.issue.pull_request }}
+        echo "------------------------------------------"
+        
     - name: Assign any new pull requests to Connect4
       uses: srggrs/assign-one-project-github-action@1.2.1
       if: ${{ github.event.issue.pull_request }}
