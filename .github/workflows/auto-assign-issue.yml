@@ -5,7 +5,7 @@ name: Auto Assign issues to Connect4
 on:
   issues:
     types: [opened, labeled, unlabeled]
-  pull_request_target:
+  pull_request:
     types: [opened, labeled, unlabeled]
 env:
     # TODO Generate token from Github settings and replace <SECRET_TOKEN> with its name
@@ -19,14 +19,14 @@ jobs:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "!github.event.issue.pull_request : "
-        echo ${{ !github.event.issue.pull_request }}
+        echo "github.event.issue.opened : "
+        echo ${{ github.event.issue.opened }}
         echo "------------------------------------------"
     
     - name: Assign any new issue to Connect4
       # package respomsible for moving issue to project board
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: ${{ !github.event.issue.pull_request }}
+      if: ${{ github.event.issue.opened }}
       with:
         # project contains url copied from connect4 Kanban board
         project: 'https://github.com/deepalite6094/test/projects/1'
@@ -41,13 +41,13 @@ jobs:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "github.event.issue.pull_request : "
-        echo ${{ github.event.issue.pull_request }}
+        echo "github.event.pull_request.opened : "
+        echo ${{ github.event.pull_request.opened }}
         echo "------------------------------------------"
         
     - name: Assign any new pull requests to Connect4
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: ${{ github.event.issue.pull_request }}
+      if: ${{ github.event.pull_request.opened }}
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
         column_name: 'Code Review'
