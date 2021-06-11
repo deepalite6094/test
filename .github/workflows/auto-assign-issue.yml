@@ -19,7 +19,7 @@ jobs:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "github.event.issue.state == "open" : "
+        echo "github.event.issue.state == open : "
         echo ${{ github.event.issue.state == "open" }}
         echo "------------------------------------------"
     
@@ -36,7 +36,7 @@ jobs:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "github.event.pull_request == "open" : "
+        echo "github.event.pull_request == open : "
         echo ${{ github.event.pull_request == "open" }}
         echo "------------------------------------------"
         
