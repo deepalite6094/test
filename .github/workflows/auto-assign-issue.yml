@@ -12,42 +12,37 @@ env:
     GITHUB_TOKEN: ${{ secrets.SECRET_TOKEN }}
 
 jobs:
-  assign_issue:
+  assign_to_one:
     runs-on: ubuntu-latest
     name: JOB Issue assignment
     steps:
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "github.event.issue : "
-        echo ${{ toJSON(github.event.issue) }}
+        echo "github.event.issue.state == "open" : "
+        echo ${{ github.event.issue.state == "open" }}
         echo "------------------------------------------"
     
     - name: Assign any new issue to Connect4
       # package respomsible for moving issue to project board
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: ${{ github.event.issue.opened }}
+      if: ${{ github.event.issue.state == "open" }}
       with:
         # project contains url copied from connect4 Kanban board
         project: 'https://github.com/deepalite6094/test/projects/1'
         # column_name should be exact same as you have on board
         column_name: 'To Do'
-        
-  assign_pullrequest_project:
-    runs-on: ubuntu-latest
-    name: JOB Pull request assignment
-    steps:
     
     - name: Echo
       run: | 
         echo "------------------------------------------"
-        echo "github.event.pull_request : "
-        echo ${{ toJSON(github.event.pull_request) }}
+        echo "github.event.pull_request == "open" : "
+        echo ${{ github.event.pull_request == "open" }}
         echo "------------------------------------------"
         
     - name: Assign any new pull requests to Connect4
       uses: srggrs/assign-one-project-github-action@1.2.1
-      if: ${{ github.event.pull_request.opened }}
+      if: ${{ github.event.pull_request == "open" }}
       with:
         project: 'https://github.com/deepalite6094/test/projects/1'
         column_name: 'Code Review'
